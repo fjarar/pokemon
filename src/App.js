@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Barra from './Barras/Barra';
+import Barra from './components/Barra/Barra';
 
 function App() {
   return (
