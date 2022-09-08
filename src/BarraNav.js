@@ -1,11 +1,8 @@
-import React from 'react';
-import {Container, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container, Navbar} from 'react-bootstrap';
 
-function App() {
-  return (
-    <>
-      <Navbar bg="dark" variant="dark">
+function BarraNav(){
+  <Navbar bg="dark" variant="dark">
   <Container>
     <Navbar.Brand href="#home">
       <img
@@ -19,8 +16,6 @@ function App() {
     </Navbar.Brand>
   </Container>
 </Navbar>
-    </>
-  );
 }
 
-export default App;
+export default BarraNav;
