@@ -9,7 +9,7 @@ function App() {
   const [pokemon, setPokemon] = useState([]);
   useEffect(() => {
     axios.get("https://pokeapi.co/api/v2/pokemon").then((res) => {
-      setPokemon(res.data.results.map((p) => p.name));
+      setPokemon(res.data.results.map(p => p.url));
     });
   }, [setPokemon]);
   return (

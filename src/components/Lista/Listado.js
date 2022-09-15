@@ -6,9 +6,9 @@ import Card from "react-bootstrap/Card";
 
 function Listado({pokemon}) {
   const [pokemonList, setPokemonList] = useState([]);
-  const [num, setNum] = useState();
+  const [poketest, setPokeTest] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const endPoint = `https://pokeapi.co/api/v2/pokemon/`;
     axios
       .get(endPoint)
@@ -19,20 +19,47 @@ function Listado({pokemon}) {
       .catch((err) => {
         console.log(err);
       });
-  }, [setPokemonList]); 
+  }, [setPokemonList]); */
 
-  const url = "https://pokeapi.co/api/v2/pokemon/";
-  function test(name){
-    return axios.get(`${url}${name}`);
+  /* useEffect(()=>{
+    const url = "https://pokeapi.co/api/v2/pokemon/";
+    setPokemonList(pokemon.map(p=>axios.get(`${p}`)
+    .then((res)=>{
+        console.log(res.data);
+    })
+    ));
+    
+  }, [setPokemonList]);*/
+  useEffect(()=>{
+    setPokemonList(Promise.all(pokemon.map(p=>axios.get(`${p}`))))
+  },[setPokemonList]);
+
+  console.log(pokemonList.Result);
+
+  function test(){
+    return axios.get(`${pokemon}`);
   }
 
-  async function getPokes() {
-    const withCoords = await Promise.all(pokemonList.map(poke => test(poke.name)));
-    console.log(withCoords);
-    return withCoords;
-  }
+  
+  /* async function getPokes() {
+    const pokemons = await Promise.all(pokemonList.map(poke => test(poke.name)));
+     const check = pokemons.map(i=>i.data);
+    return pokemons;
+  } */
 
-  const pokes = getPokes();
+  /* Promise.all(pokemon.map(p=>axios.get(p))).then(
+    axios.spread((...allData)=>{
+        setPokeTest(allData);
+    })
+  );
+
+  const getPokemon = async () => {
+    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=5');
+    const results = response?.data?.results || [];
+  
+    return Promise.all(results.map((res) => axios.get(res.url)));
+  } */
+  
   /* useEffect(() => {
     const endPoint = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
     axios
@@ -51,17 +78,17 @@ function Listado({pokemon}) {
   return (
     <>
       <div className="row m-auto">
-        {pokemon.map(p => {
+        {pokemon.map((po, index) => {
           return (
-            <Card style={{ width: "18rem" }} key={p}>
+            <Card style={{ width: "18rem" }} key={index}>
               <Card.Img variant="top" src="/images/images.jfif" />
               <Card.Body>
                 <Card.Title>
-                  {p}
+                  {po}
                 </Card.Title>
                 <Card.Text>
                   Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  the bulk of the card's contentsdsdwdwdwd.
                 </Card.Text>
                 <Button variant="primary">Go somewhere</Button>
               </Card.Body>
